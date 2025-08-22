@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 灵动岛导航栏 -->
+    <nav class="dynamic-island">
+        <button class="nav-btn home-btn" onclick="scrollToPage('hero')">首页</button>
+        <div class="nav-divider"></div>
+        <button class="nav-btn" onclick="scrollToPage('player')">介绍</button>
+        <button class="nav-btn" onclick="scrollToPage('gallery')">展示</button>
+        <button class="nav-btn" onclick="scrollToPage('join')">加入</button>
+    </nav>
+
     <!-- 动态粒子背景 -->
     <div class="particles" id="particles"></div>
     
@@ -138,14 +147,93 @@
             }
         }
 
-        // 鼠标跟随光效
+        // 鼠标跟随光效和拖尾
         function initCursorGlow() {
             const cursorGlow = document.getElementById('cursor-glow');
+            const trailElements = [];
+            const trailLength = 15;
+            
+            // 创建拖尾元素
+            for (let i = 0; i < trailLength; i++) {
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.style.position = 'fixed';
+                trail.style.width = '12px';
+                trail.style.height = '12px';
+                trail.style.borderRadius = '50%';
+                trail.style.pointerEvents = 'none';
+                trail.style.zIndex = '9998';
+                trail.style.mixBlendMode = 'screen';
+                trail.style.opacity = (trailLength - i) / trailLength * 0.8;
+                trail.style.transform = `scale(${(trailLength - i) / trailLength * 0.8})`;
+                document.body.appendChild(trail);
+                trailElements.push({
+                    element: trail,
+                    x: -100,
+                    y: -100
+                });
+            }
+            
+            let mouseX = 0, mouseY = 0;
+            let targetX = 0, targetY = 0;
             
             document.addEventListener('mousemove', (e) => {
-                cursorGlow.style.left = e.clientX - 10 + 'px';
-                cursorGlow.style.top = e.clientY - 10 + 'px';
+                targetX = e.clientX;
+                targetY = e.clientY;
             });
+            
+            // 拖尾动画
+            function updateTrail() {
+                // 平滑跟随
+                mouseX += (targetX - mouseX) * 0.25;
+                mouseY += (targetY - mouseY) * 0.25;
+                
+                // 更新主光点位置
+                cursorGlow.style.left = mouseX - 8 + 'px';
+                cursorGlow.style.top = mouseY - 8 + 'px';
+                
+                // 更新拖尾位置 - 使用不同的跟随速度创造自然的拖尾效果
+                for (let i = trailElements.length - 1; i > 0; i--) {
+                    const followSpeed = 0.3 - (i * 0.015); // 越后面的拖尾跟随越慢
+                    trailElements[i].x += (trailElements[i - 1].x - trailElements[i].x) * followSpeed;
+                    trailElements[i].y += (trailElements[i - 1].y - trailElements[i].y) * followSpeed;
+                }
+                
+                trailElements[0].x = mouseX;
+                trailElements[0].y = mouseY;
+                
+                trailElements.forEach((trail, index) => {
+                    trail.element.style.left = trail.x - 6 + 'px';
+                    trail.element.style.top = trail.y - 6 + 'px';
+                    
+                    // 明亮的彩色拖尾效果 - 更自然的颜色过渡
+                    const colors = [
+                        'rgba(255, 20, 147, 0.9)',   // 深粉红
+                        'rgba(255, 100, 200, 0.9)',  // 浅粉红
+                        'rgba(0, 255, 255, 0.9)',    // 青色
+                        'rgba(100, 255, 200, 0.9)',  // 浅青色
+                        'rgba(50, 255, 50, 0.9)',    // 亮绿
+                        'rgba(150, 255, 100, 0.9)',  // 浅绿
+                        'rgba(255, 255, 0, 0.9)',    // 黄色
+                        'rgba(255, 200, 100, 0.9)',  // 橙黄
+                        'rgba(138, 43, 226, 0.9)',   // 紫色
+                        'rgba(200, 100, 255, 0.9)'   // 浅紫
+                    ];
+                    
+                    const colorIndex = (index + Math.floor(Date.now() / 300)) % colors.length;
+                    const opacity = (trailLength - index) / trailLength * 0.85;
+                    const size = 8 + (trailLength - index) / trailLength * 4; // 动态大小
+                    
+                    trail.element.style.width = size + 'px';
+                    trail.element.style.height = size + 'px';
+                    trail.element.style.background = `radial-gradient(circle, ${colors[colorIndex].replace('0.9', opacity.toString())} 0%, transparent 70%)`;
+                    trail.element.style.boxShadow = `0 0 ${12 + size}px ${colors[colorIndex].replace('0.9', (opacity * 0.7).toString())}`;
+                });
+                
+                requestAnimationFrame(updateTrail);
+            }
+            
+            updateTrail();
         }
 
         // 页面加载动画
@@ -161,6 +249,57 @@
             document.querySelector('.player-section').scrollIntoView({
                 behavior: 'smooth'
             });
+        }
+
+        // 导航栏功能
+        function scrollToPage(pageId) {
+            let targetSection;
+            switch(pageId) {
+                case 'hero':
+                    targetSection = document.querySelector('.hero-section');
+                    break;
+                case 'player':
+                    targetSection = document.querySelector('.player-section');
+                    break;
+                case 'gallery':
+                    targetSection = document.querySelector('.gallery-showcase');
+                    break;
+                case 'join':
+                    targetSection = document.querySelector('.join-section');
+                    break;
+            }
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // 更新导航栏活跃状态
+        function updateActiveNav() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const viewportHeight = window.innerHeight;
+            const navBtns = document.querySelectorAll('.nav-btn');
+            
+            // 移除所有活跃状态
+            navBtns.forEach(btn => btn.classList.remove('active'));
+            
+            // 根据滚动位置设置活跃状态
+            // navBtns[0] = 首页, navBtns[1] = 介绍, navBtns[2] = 展示, navBtns[3] = 加入
+            if (scrollTop < viewportHeight * 0.5) {
+                // 首页
+                navBtns[0].classList.add('active');
+            } else if (scrollTop < viewportHeight * 1.5) {
+                // 介绍页
+                navBtns[1].classList.add('active');
+            } else if (scrollTop < viewportHeight * 2.5) {
+                // 展示页
+                navBtns[2].classList.add('active');
+            } else {
+                // 加入页
+                navBtns[3].classList.add('active');
+            }
         }
 
         // 鼠标滚轮翻页效果
@@ -225,6 +364,9 @@
 
         // 监听滚轮事件
         window.addEventListener('wheel', handleWheelScroll, { passive: false });
+        
+        // 监听滚动事件更新导航栏
+        window.addEventListener('scroll', updateActiveNav);
 
         // 页面加载完成后初始化所有特效
         document.addEventListener('DOMContentLoaded', function() {
@@ -236,6 +378,9 @@
             
             // 初始化页面动画
             initPageAnimations();
+            
+            // 初始化导航栏状态
+            updateActiveNav();
             
             // 为传送带图片添加闪烁效果
             const conveyorItems = document.querySelectorAll('.conveyor-item img');
