@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 动态粒子背景 -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- 鼠标跟随光效 -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+
     <!-- 全屏背景图片区域 -->
     <section class="hero-section">
         <div class="hero-background">
@@ -15,7 +21,6 @@
         <div class="hero-overlay">
             <div class="hero-content">
                 <h1 class="hero-title">Mikraft</h1>
-                <p class="hero-subtitle">IP：play.mikraft.top    版本：1.21.4</p>
                 <p class="hero-subtitle">方块人的温馨小窝</p>
                 <button class="scroll-down-btn" onclick="scrollToContent()">
                     <span>探索更多</span>
@@ -84,7 +89,7 @@
                 <div class="conveyor-track">
                     <div class="conveyor-item">
                         <img src="ShowPictures/building_浮空魔丸.png" alt="浮空魔丸">
-                        <span class="item-title">浮空魔丸-原创</span>
+                        <span class="item-title">浮空魔丸</span>
                     </div>
                     <div class="conveyor-item">
                         <img src="ShowPictures/building_樱花风地狱门.png" alt="樱花风地狱门">
@@ -112,13 +117,46 @@
                 <a href="https://qm.qq.com/cgi-bin/qm/qr?k=768716343&jump_from=webapi" target="_blank" class="join-button">
                     加入我们
                 </a>
-                <p class="join-description">QQ交流群768716343</p>
                 <p class="join-description">服务器采用白名单制， 需加群后申请白名单</p>
             </div>
         </div>
     </section>
 
     <script>
+        // 创建动态粒子效果
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // 鼠标跟随光效
+        function initCursorGlow() {
+            const cursorGlow = document.getElementById('cursor-glow');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursorGlow.style.left = e.clientX - 10 + 'px';
+                cursorGlow.style.top = e.clientY - 10 + 'px';
+            });
+        }
+
+        // 页面加载动画
+        function initPageAnimations() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                section.classList.add('page-transition');
+                section.style.animationDelay = index * 0.2 + 's';
+            });
+        }
+
         function scrollToContent() {
             document.querySelector('.player-section').scrollIntoView({
                 behavior: 'smooth'
@@ -188,9 +226,30 @@
         // 监听滚轮事件
         window.addEventListener('wheel', handleWheelScroll, { passive: false });
 
-        // 传送带悬停效果和无缝循环
+        // 页面加载完成后初始化所有特效
         document.addEventListener('DOMContentLoaded', function() {
-            // 为每个传送带创建无缝循环
+            // 初始化粒子效果
+            createParticles();
+            
+            // 初始化鼠标光效
+            initCursorGlow();
+            
+            // 初始化页面动画
+            initPageAnimations();
+            
+            // 为传送带图片添加闪烁效果
+            const conveyorItems = document.querySelectorAll('.conveyor-item img');
+            conveyorItems.forEach(img => {
+                img.addEventListener('mouseenter', function() {
+                    this.style.filter = 'brightness(1.2) saturate(1.3)';
+                    this.style.transition = 'filter 0.3s ease';
+                });
+                img.addEventListener('mouseleave', function() {
+                    this.style.filter = 'brightness(1) saturate(1)';
+                });
+            });
+
+            // 传送带悬停效果和无缝循环
             const conveyorTracks = document.querySelectorAll('.conveyor-track');
             
             conveyorTracks.forEach(track => {
@@ -204,9 +263,9 @@
             });
             
             // 悬停效果
-            const conveyorItems = document.querySelectorAll('.conveyor-item');
+            const allConveyorItems = document.querySelectorAll('.conveyor-item');
             
-            conveyorItems.forEach(item => {
+            allConveyorItems.forEach(item => {
                 const track = item.closest('.conveyor-track');
                 
                 item.addEventListener('mouseenter', function() {
@@ -221,5 +280,10 @@
             });
         });
     </script>
+    
+    <!-- 网站版权信息 -->
+    <footer class="site-footer">
+        <p>©2025 MikraftWeb</p>
+    </footer>
 </body>
 </html>
