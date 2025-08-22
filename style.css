@@ -519,15 +519,12 @@ body {
     width: 100%;
     max-width: 350px;
     height: auto;
-    border-radius: var(--border-radius-small);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
     cursor: pointer;
 }
 
 .player-img:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* 文本内容区域 */
