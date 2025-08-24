@@ -58,6 +58,31 @@ body::before {
     z-index: -1;
     filter: blur(0px) brightness(1);
     transition: none;
+    /* Dark Reader 适配 */
+    mix-blend-mode: normal;
+    isolation: isolate;
+}
+
+/* Dark Reader 插件适配 */
+@media (prefers-color-scheme: dark) {
+    body::before {
+        filter: blur(0px) brightness(0.8) contrast(1.1);
+    }
+}
+
+/* 强制显示背景图片，防止被 Dark Reader 隐藏 */
+body::before {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* 为 Dark Reader 提供额外的样式保护 */
+[data-darkreader-scheme="dark"] body::before,
+.darkreader body::before {
+    filter: blur(0px) brightness(0.7) contrast(1.2) !important;
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
 }
 
 /* 模糊遮罩层 - 用于实现从下往上的模糊效果 */
