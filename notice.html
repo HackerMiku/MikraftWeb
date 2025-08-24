@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公告 - Mikraft</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="notice.css">
+</head>
+<body>
+    <!-- 灵动岛导航栏 -->
+    <nav class="dynamic-island">
+        <a href="index.html" class="nav-btn home-btn">← 返回主页</a>
+        <div class="nav-divider"></div>
+        <button class="nav-btn active">公告</button>
+    </nav>
+
+    <!-- 公告页面内容 -->
+    <section class="notice-section">
+        <div class="notice-container">
+            <h1 class="notice-title">📢 服务器公告</h1>
+            <div class="notice-list" id="notice-list">
+                <!-- 公告内容将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 公告数据
+        const notices = [
+            {
+                filename: '三权制衡_2025_08_25.md',
+                title: '三权制衡',
+                date: '2025-08-25',
+                content: `# 三权制衡
+
+天启已至，灾厄将临，吾命如风中残烛，终难逃湮灭之劫。然**mikraft**之圣火不可断绝，吾之意志必须永续！
+谨遵苍穹谕旨，以血与火铸就契约，在此将天命权柄三分，赐予三位天命之子——立三柱而撑天地，分权柄而制衡，共掌
+混沌寰宇！
+
+## 「开拓之柱」· *荒芜边疆的征服者*
+**7a7ya**，吾赐汝钻石之镐，命汝劈开虚无，筑起文明之基！汝掌「开辟」之权，凡荒土所在，皆应为城；凡黑暗所覆，必
+燃火种！
+
+## 「赤石之柱」· *赤石的守护者*
+**MC_Yao_Wan**，吾予汝熔岩之契，命汝执掌大地血脉，炼铸万物之源！汝承「红核」之责，铸兵甲以镇四方，煅神器以定
+乾坤！
+
+## 「智械之柱」· *永恒回响的编织者*
+**He_HuaQAQ**，吾授汝红石秘卷，命汝构织逻辑之网，启鸣机械神谕！汝司「序理」之职，以齿轮驭时空，以石粉写天命！
+
+三权相峙，互衡互生！
+
+若一者倾天，二者共裁之；若万物崩殂，三者合阵复寰宇！
+
+——天命已降，契约即成！
+
+***吾虽逝，而mikraft永存！***`
+            }
+        ];
+
+        // 简单的Markdown渲染函数
+        function renderMarkdown(text) {
+            return text
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>')
+                .replace(/^(.*)$/gim, '<p>$1</p>')
+                .replace(/<p><h/g, '<h')
+                .replace(/<\/h([1-6])><\/p>/g, '</h$1>')
+                .replace(/<p><\/p>/g, '');
+        }
+
+        // 格式化日期
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // 加载公告
+        function loadNotices() {
+            const noticeList = document.getElementById('notice-list');
+            
+            notices.forEach(notice => {
+                const noticeItem = document.createElement('div');
+                noticeItem.className = 'notice-item';
+                
+                noticeItem.innerHTML = `
+                    <div class="notice-header">
+                        <h2 class="notice-item-title">${notice.title}</h2>
+                        <span class="notice-date">${formatDate(notice.date)}</span>
+                    </div>
+                    <div class="notice-content">
+                        ${renderMarkdown(notice.content)}
+                    </div>
+                `;
+                
+                noticeList.appendChild(noticeItem);
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNotices();
+        });
+    </script>
+
+    <!-- 网站版权信息 -->
+    <footer class="site-footer">
+        <p>©2025 MikraftWeb</p>
+    </footer>
+</body>
+</html>

@@ -8,12 +8,21 @@
 </head>
 <body>
     <!-- 灵动岛导航栏 -->
-    <nav class="dynamic-island">
+    <nav class="dynamic-island" id="dynamic-island">
         <button class="nav-btn home-btn" onclick="scrollToPage(0)">Mikraft</button>
         <div class="nav-divider"></div>
         <button class="nav-btn" onclick="scrollToPage(1)">介绍</button>
         <button class="nav-btn" onclick="scrollToPage(2)">展示</button>
         <button class="nav-btn" onclick="scrollToPage(3)">加入</button>
+        <div class="nav-divider"></div>
+        <button class="nav-btn more-btn" onclick="toggleMoreMenu()">更多</button>
+        
+        <!-- 扩展菜单 -->
+        <div class="expanded-menu" id="expanded-menu">
+            <div class="expanded-content">
+                <a href="notice.html" class="expanded-btn">公告</a>
+            </div>
+        </div>
     </nav>
 
     <!-- 首页内容区域 -->
@@ -151,6 +160,36 @@
                 });
             }
         }
+
+        // 扩展菜单功能
+        function toggleMoreMenu() {
+            const expandedMenu = document.getElementById('expanded-menu');
+            const dynamicIsland = document.getElementById('dynamic-island');
+            const moreBtn = document.querySelector('.more-btn');
+            
+            if (expandedMenu.classList.contains('active')) {
+                expandedMenu.classList.remove('active');
+                dynamicIsland.classList.remove('expanded');
+                moreBtn.textContent = '更多';
+            } else {
+                expandedMenu.classList.add('active');
+                dynamicIsland.classList.add('expanded');
+                moreBtn.textContent = '收起';
+            }
+        }
+
+        // 点击外部关闭扩展菜单
+        document.addEventListener('click', function(event) {
+            const dynamicIsland = document.getElementById('dynamic-island');
+            const expandedMenu = document.getElementById('expanded-menu');
+            const moreBtn = document.querySelector('.more-btn');
+            
+            if (!dynamicIsland.contains(event.target) && expandedMenu.classList.contains('active')) {
+                expandedMenu.classList.remove('active');
+                dynamicIsland.classList.remove('expanded');
+                moreBtn.textContent = '更多';
+            }
+        });
 
         // 更新导航栏活跃状态和背景模糊效果
         function updateActiveNav() {
