@@ -29,6 +29,13 @@
         // 公告数据
         const notices = [
             {
+                filename: '服主驾崩_2025_8_31.md',
+                title: '服主驾崩',
+                date: '2025-08-31',
+                content: ``,
+                image: 'Notice/服主驾崩_2025_8_31.webp'
+            },
+            {
                 filename: '问题处理DarkReader_2025_08_25.txt',
                 title: '问题处理DarkReader',
                 date: '2025-08-25',
@@ -101,12 +108,15 @@
                 const noticeItem = document.createElement('div');
                 noticeItem.className = 'notice-item';
                 
+                const imageHtml = notice.image ? `<img src="${notice.image}" alt="${notice.title}" class="notice-image">` : '';
+                
                 noticeItem.innerHTML = `
                     <div class="notice-header">
                         <h2 class="notice-item-title">${notice.title}</h2>
                         <span class="notice-date">${formatDate(notice.date)}</span>
                     </div>
                     <div class="notice-content">
+                        ${imageHtml}
                         ${renderMarkdown(notice.content)}
                     </div>
                 `;

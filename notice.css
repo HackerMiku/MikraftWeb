@@ -232,3 +232,34 @@
         font-size: 1rem;
     }
 }
+
+/* 公告图片样式 */
+.notice-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 12px;
+    margin: 20px auto;
+    display: block;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        0 0 15px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.notice-image:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 响应式图片 */
+@media (max-width: 768px) {
+    .notice-image {
+        max-width: 100%;
+        margin: 15px auto;
+    }
+}
