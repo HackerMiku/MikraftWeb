@@ -3,344 +3,345 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikraft-温暖小窝</title>
+    <title>Mikraft - 方块人的温馨小窝</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 灵动岛导航栏 -->
-    <nav class="dynamic-island" id="dynamic-island">
-        <button class="nav-btn home-btn" onclick="scrollToPage(0)">Mikraft</button>
-        <div class="nav-divider"></div>
-        <button class="nav-btn" onclick="scrollToPage(1)">介绍</button>
-        <button class="nav-btn" onclick="scrollToPage(2)">展示</button>
-        <button class="nav-btn" onclick="scrollToPage(3)">加入</button>
-        <div class="nav-divider"></div>
-        <button class="nav-btn more-btn" onclick="toggleMoreMenu()">更多</button>
-        
-        <!-- 扩展菜单 -->
-        <div class="expanded-menu" id="expanded-menu">
-            <div class="expanded-content">
-                <a href="notice.html" class="expanded-btn">公告</a>
-            </div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="brand-gradient">Mikraft</span>
+        </div>
+        <div class="nav-links">
+            <a href="#hero" class="nav-link">首页</a>
+            <a href="#about" class="nav-link">介绍</a>
+            <a href="#gallery" class="nav-link">展示</a>
+            <a href="notices.html" class="nav-link">公告</a>
+            <a href="#join" class="nav-link">加入</a>
+        </div>
+        <div class="theme-toggle">
+            <div class="toggle-ball"></div>
         </div>
     </nav>
 
-    <!-- 首页内容区域 -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">Mikraft</h1>
-            <p class="hero-subtitle">方块人的温馨小窝</p>
-            <button class="scroll-down-btn" onclick="scrollToContent()">
-                <span>探索更多</span>
-                <div class="arrow-down">↓</div>
-            </button>
-        </div>
-    </section>
-
-    <!-- 玩家介绍区域 -->
-    <section class="player-section" id="player-section">
-        <div class="player-content">
-            <div class="player-text">
-                <h2 class="section-title">🎉欢迎你的加入</h2>
-                <div class="text-content">
-                    <p>没有争议和对峙，只有和谐与友爱</p>
-                    <p>我们追求团队合作，一起完成天马行空的梦想</p>
-                    <p>拿起方块，将想象的建筑亲手搭建</p>
-                    <p>拾起红石，为科技的进步添砖加瓦</p>
-                    <p>这里既是大展身手的方块舞台，也是休闲娱乐的温暖小窝</p>
-                    <p>不止MC，我们还欢迎别的爱好讨论</p>
-                    <p>网游、单机、番剧、音乐...</p>
+    <main class="main-content">
+        <!-- 英雄区域 -->
+        <section class="hero" id="hero">
+            <div class="hero-bg">
+                <div class="gradient-orb orb-1"></div>
+                <div class="gradient-orb orb-2"></div>
+                <div class="gradient-orb orb-3"></div>
+            </div>
+            
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>🎮 Minecraft 服务器</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line">Mikraft</span>
+                    <span class="title-line gradient-text">温馨小窝</span>
+                </h1>
+                <p class="hero-description">
+                    方块人的温馨小窝，没有争议和对峙，只有和谐与友爱
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="scrollToSection('join')">
+                        <span>加入我们</span>
+                        <div class="btn-shine"></div>
+                    </button>
+                    <button class="btn-secondary" onclick="scrollToSection('about')">
+                        <span>了解更多</span>
+                        <svg class="play-icon" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
-            <div class="player-image">
-                <img src="Page_1_player.webp" alt="Mikraft 玩家" class="player-img">
-            </div>
-        </div>
-    </section>
 
-    <!-- 展示页面 -->
-    <section class="gallery-showcase" id="gallery-showcase">
-        <!-- 机器展示传送带 -->
-        <div class="conveyor-section">
-            <h2 class="conveyor-title">机器</h2>
-            <div class="conveyor-belt" id="machine-belt">
-                <div class="conveyor-track">
-                    <div class="conveyor-item">
-                        <img src="ShowPictures/machine_凋零玫瑰农场.webp" alt="凋零玫瑰农场">
-                        <span class="item-title">凋零玫瑰农场</span>
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon">🏗️</div>
+                        <h3>建筑创作</h3>
+                        <p>天马行空的建筑梦想</p>
                     </div>
-                    <div class="conveyor-item">
-                        <img src="ShowPictures/machine_固化机.webp" alt="固化机">
-                        <span class="item-title">固化机</span>
+                </div>
+                
+                <div class="floating-card card-2">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon">⚙️</div>
+                        <h3>红石科技</h3>
+                        <p>为科技进步添砖加瓦</p>
                     </div>
-                    <div class="conveyor-item">
-                        <img src="ShowPictures/machine_蜜蜂农场.webp" alt="蜜蜂农场">
-                        <span class="item-title">蜜蜂农场</span>
-                    </div>
-                    <div class="conveyor-item">
-                        <img src="ShowPictures/machine_袭击塔.webp" alt="袭击塔">
-                        <span class="item-title">袭击塔</span>
-                    </div>
-                    <div class="conveyor-item">
-                        <img src="ShowPictures/machine_猪灵交易并猪人塔.webp" alt="猪灵交易并猪人塔">
-                        <span class="item-title">猪灵交易并猪人塔</span>
-                    </div>
-                    <div class="conveyor-item">
-                        <img src="ShowPictures/machine_320熔炉组.webp" alt="320熔炉组">
-                        <span class="item-title">320熔炉组</span>
+                </div>
+
+                <div class="floating-card card-3">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon">🤝</div>
+                        <h3>团队合作</h3>
+                        <p>和谐友爱的游戏环境</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- 建筑展示传送带 -->
-        <div class="conveyor-section">
-            <h2 class="conveyor-title">建筑</h2>
-            <div class="conveyor-belt reverse" id="building-belt">
-                <div class="conveyor-track">
-                    <div class="conveyor-item">
-                        <img src="ShowPictures/building_浮空魔丸.webp" alt="浮空魔丸">
-                        <span class="item-title">浮空魔丸</span>
+        <!-- 介绍区域 -->
+        <section class="about-section" id="about">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">🎉 欢迎你的加入</h2>
+                    <div class="text-content">
+                        <p>没有争议和对峙，只有和谐与友爱</p>
+                        <p>我们追求团队合作，一起完成天马行空的梦想</p>
+                        <p>拿起方块，将想象的建筑亲手搭建</p>
+                        <p>拾起红石，为科技的进步添砖加瓦</p>
+                        <p>这里既是大展身手的方块舞台，也是休闲娱乐的温暖小窝</p>
+                        <p>不止MC，我们还欢迎别的爱好讨论</p>
+                        <p>网游、单机、番剧、音乐...</p>
                     </div>
-                    <div class="conveyor-item">
-                        <img src="ShowPictures/building_樱花风地狱门.webp" alt="樱花风地狱门">
-                        <span class="item-title">樱花风地狱门</span>
-                    </div>
-                    <div class="conveyor-item">
-                        <img src="ShowPictures/building_钟楼.webp" alt="钟楼">
-                        <span class="item-title">钟楼</span>
-                    </div>
-                    <div class="conveyor-item">
-                        <img src="ShowPictures/building_建筑师招募.webp" alt="建筑师招募">
-                        <span class="item-title">建筑师招募</span>
+                </div>
+                
+                <div class="about-visual">
+                    <div class="minecraft-scene">
+                        <div class="block-animation">
+                            <div class="block grass"></div>
+                            <div class="block stone"></div>
+                            <div class="block wood"></div>
+                            <div class="block diamond"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- 版权声明 -->
-        <div class="copyright-notice">
-            ⚠该图展示皆为玩家搭建。没有特别标注，皆为非原创。 若有侵权， 请联系QQ1953494850
-        </div>
-    </section>
+        <!-- 展示画廊 -->
+        <section class="gallery-showcase" id="gallery">
+            <div class="gallery-header">
+                <h2>作品展示</h2>
+                <p>玩家们的精彩创作</p>
+            </div>
+            
+            <!-- 机器展示 -->
+            <div class="showcase-category">
+                <h3 class="category-title">⚙️ 红石机器</h3>
+                <div class="showcase-grid">
+                    <div class="showcase-item" data-category="machine">
+                        <div class="showcase-image">
+                            <img src="ShowPictures/machine_凋零玫瑰农场.webp" alt="凋零玫瑰农场" loading="lazy">
+                            <div class="showcase-overlay">
+                                <h4>凋零玫瑰农场</h4>
+                                <p>自动化凋零玫瑰生产系统</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="showcase-item" data-category="machine">
+                        <div class="showcase-image">
+                            <img src="ShowPictures/machine_固化机.webp" alt="固化机" loading="lazy">
+                            <div class="showcase-overlay">
+                                <h4>固化机</h4>
+                                <p>高效物品固化装置</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="showcase-item" data-category="machine">
+                        <div class="showcase-image">
+                            <img src="ShowPictures/machine_蜜蜂农场.webp" alt="蜜蜂农场" loading="lazy">
+                            <div class="showcase-overlay">
+                                <h4>蜜蜂农场</h4>
+                                <p>自动化蜂蜜生产系统</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="showcase-item" data-category="machine">
+                        <div class="showcase-image">
+                            <img src="ShowPictures/machine_袭击塔.webp" alt="袭击塔" loading="lazy">
+                            <div class="showcase-overlay">
+                                <h4>袭击塔</h4>
+                                <p>高效经验获取装置</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="showcase-item" data-category="machine">
+                        <div class="showcase-image">
+                            <img src="ShowPictures/machine_320熔炉组.webp" alt="320熔炉组" loading="lazy">
+                            <div class="showcase-overlay">
+                                <h4>320熔炉组</h4>
+                                <p>大规模物品冶炼系统</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="showcase-item" data-category="machine">
+                        <div class="showcase-image">
+                            <img src="ShowPictures/machine_猪灵交易并猪人塔.webp" alt="猪灵交易并猪人塔" loading="lazy">
+                            <div class="showcase-overlay">
+                                <h4>猪灵交易塔</h4>
+                                <p>猪灵交易与经验获取</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <!-- 第四页 - 加入我们 -->
-    <section class="join-section" id="join-section">
-        <div class="join-content">
-            <h1 class="join-title">我们会一直等你</h1>
-            <div class="join-button-container">
-                <a href="https://qm.qq.com/cgi-bin/qm/qr?k=768716343&jump_from=webapi" target="_blank" class="join-button">
-                    加入我们
-                </a>
-                <p class="join-description">服务器采用白名单制， 需加群后申请白名单</p>
+            <!-- 建筑展示 -->
+            <div class="showcase-category">
+                <h3 class="category-title">🏗️ 精美建筑</h3>
+                <div class="showcase-grid">
+                    <div class="showcase-item" data-category="building">
+                        <div class="showcase-image">
+                            <img src="ShowPictures/building_浮空魔丸.webp" alt="浮空魔丸" loading="lazy">
+                            <div class="showcase-overlay">
+                                <h4>浮空魔丸</h4>
+                                <p>神秘的浮空建筑</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="showcase-item" data-category="building">
+                        <div class="showcase-image">
+                            <img src="ShowPictures/building_樱花风地狱门.webp" alt="樱花风地狱门" loading="lazy">
+                            <div class="showcase-overlay">
+                                <h4>樱花风地狱门</h4>
+                                <p>优雅的传送门设计</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="showcase-item" data-category="building">
+                        <div class="showcase-image">
+                            <img src="ShowPictures/building_钟楼.webp" alt="钟楼" loading="lazy">
+                            <div class="showcase-overlay">
+                                <h4>钟楼</h4>
+                                <p>古典风格的时钟塔</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="showcase-item" data-category="building">
+                        <div class="showcase-image">
+                            <img src="ShowPictures/building_建筑师招募.webp" alt="建筑师招募" loading="lazy">
+                            <div class="showcase-overlay">
+                                <h4>建筑师招募</h4>
+                                <p>欢迎建筑大师加入</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright-notice">
+                ⚠️ 该图展示皆为玩家搭建。没有特别标注，皆为非原创。若有侵权，请联系QQ1953494850
+            </div>
+        </section>
+
+        <!-- 加入我们 -->
+        <section class="join-section" id="join">
+            <div class="join-bg">
+                <div class="join-orb orb-1"></div>
+                <div class="join-orb orb-2"></div>
+            </div>
+            
+            <div class="join-content">
+                <div class="join-text">
+                    <h2>我们会一直等你</h2>
+                    <p>准备好在方块世界中开始你的冒险了吗？加入我们的大家庭，一起创造属于我们的回忆！</p>
+                    
+                    <div class="join-features">
+                        <div class="join-feature">
+                            <div class="feature-icon">🛡️</div>
+                            <div>
+                                <h4>白名单制</h4>
+                                <p>安全可靠的游戏环境</p>
+                            </div>
+                        </div>
+                        
+                        <div class="join-feature">
+                            <div class="feature-icon">👥</div>
+                            <div>
+                                <h4>友好社区</h4>
+                                <p>和谐友爱的玩家群体</p>
+                            </div>
+                        </div>
+                        
+                        <div class="join-feature">
+                            <div class="feature-icon">🎮</div>
+                            <div>
+                                <h4>多元化</h4>
+                                <p>不只是MC，更多话题讨论</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="join-form">
+                    <div class="join-card">
+                        <h3>加入步骤</h3>
+                        <div class="join-steps">
+                            <div class="join-step">
+                                <span class="step-number">1</span>
+                                <div class="step-content">
+                                    <h4>加入QQ群</h4>
+                                    <p>点击下方按钮加入我们的QQ群</p>
+                                </div>
+                            </div>
+                            
+                            <div class="join-step">
+                                <span class="step-number">2</span>
+                                <div class="step-content">
+                                    <h4>申请白名单</h4>
+                                    <p>在群内申请白名单权限</p>
+                                </div>
+                            </div>
+                            
+                            <div class="join-step">
+                                <span class="step-number">3</span>
+                                <div class="step-content">
+                                    <h4>开始游戏</h4>
+                                    <p>获得白名单后即可进入服务器</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="https://qm.qq.com/cgi-bin/qm/qr?k=768716343&jump_from=webapi" target="_blank" class="join-button">
+                            <span>加入QQ群</span>
+                            <div class="btn-particles"></div>
+                        </a>
+                        
+                        <p class="join-note">服务器采用白名单制，需加群后申请白名单</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="brand-gradient">Mikraft</span>
+                <p>方块人的温馨小窝</p>
+            </div>
+            <div class="footer-links">
+                <a href="#hero">首页</a>
+                <a href="#about">介绍</a>
+                <a href="#gallery">展示</a>
+                <a href="notices.html">公告</a>
+                <a href="#join">加入</a>
+            </div>
+            <div class="footer-info">
+                <p>&copy; 2025 Mikraft. 保持创造，保持友爱。</p>
             </div>
         </div>
-    </section>
-
-    <script>
-        function scrollToContent() {
-            document.querySelector('.player-section').scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-
-        // 导航栏功能
-        function scrollToPage(pageId) {
-            let targetSection;
-            switch(pageId) {
-                case 0:
-                    targetSection = document.querySelector('.hero-section');
-                    break;
-                case 1:
-                    targetSection = document.querySelector('.player-section');
-                    break;
-                case 2:
-                    targetSection = document.querySelector('.gallery-showcase');
-                    break;
-                case 3:
-                    targetSection = document.querySelector('.join-section');
-                    break;
-            }
-            
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        // 扩展菜单功能
-        function toggleMoreMenu() {
-            const expandedMenu = document.getElementById('expanded-menu');
-            const dynamicIsland = document.getElementById('dynamic-island');
-            const moreBtn = document.querySelector('.more-btn');
-            
-            if (expandedMenu.classList.contains('active')) {
-                expandedMenu.classList.remove('active');
-                dynamicIsland.classList.remove('expanded');
-                moreBtn.textContent = '更多';
-            } else {
-                expandedMenu.classList.add('active');
-                dynamicIsland.classList.add('expanded');
-                moreBtn.textContent = '收起';
-            }
-        }
-
-        // 点击外部关闭扩展菜单
-        document.addEventListener('click', function(event) {
-            const dynamicIsland = document.getElementById('dynamic-island');
-            const expandedMenu = document.getElementById('expanded-menu');
-            const moreBtn = document.querySelector('.more-btn');
-            
-            if (!dynamicIsland.contains(event.target) && expandedMenu.classList.contains('active')) {
-                expandedMenu.classList.remove('active');
-                dynamicIsland.classList.remove('expanded');
-                moreBtn.textContent = '更多';
-            }
-        });
-
-        // 更新导航栏活跃状态和背景模糊效果
-        function updateActiveNav() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const viewportHeight = window.innerHeight;
-            const navBtns = document.querySelectorAll('.nav-btn');
-            
-            // 移除所有活跃状态
-            navBtns.forEach(btn => btn.classList.remove('active'));
-            
-            // 计算滚动进度 - 从第一页开始滚动时逐渐模糊
-            const scrollProgress = Math.min(scrollTop / (viewportHeight * 0.8), 1);
-            
-            // 动态调整模糊遮罩
-            if (scrollTop > 0) {
-                document.body.classList.add('scrolling');
-                // 根据滚动进度调整模糊强度和透明度 - 适中的模糊强度
-                const blurAmount = scrollProgress * 12;
-                const opacity = scrollProgress;
-                document.body.style.setProperty('--blur-amount', `${blurAmount}px`);
-                document.body.style.setProperty('--mask-opacity', opacity);
-            } else {
-                document.body.classList.remove('scrolling');
-            }
-            
-            // 导航栏状态
-            if (scrollTop < viewportHeight * 0.5) {
-                navBtns[0].classList.add('active');
-            } else if (scrollTop < viewportHeight * 1.5) {
-                navBtns[1].classList.add('active');
-            } else if (scrollTop < viewportHeight * 2.5) {
-                navBtns[2].classList.add('active');
-            } else {
-                navBtns[3].classList.add('active');
-            }
-        }
-
-        // 鼠标滚轮翻页效果
-        let isScrolling = false;
-
-        function handleWheelScroll(event) {
-            if (isScrolling) return;
-            
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const heroSection = document.querySelector('.hero-section');
-            const playerSection = document.querySelector('.player-section');
-            const gallerySection = document.querySelector('.gallery-showcase');
-            const joinSection = document.querySelector('.join-section');
-            
-            const viewportHeight = window.innerHeight;
-            
-            // 判断当前位置
-            if (scrollTop < viewportHeight * 0.5) {
-                // 在首页
-                if (event.deltaY > 0) {
-                    event.preventDefault();
-                    isScrolling = true;
-                    playerSection.scrollIntoView({ behavior: 'smooth' });
-                    setTimeout(() => { isScrolling = false; }, 1000);
-                }
-            } else if (scrollTop < viewportHeight * 1.5) {
-                // 在第二页
-                if (event.deltaY > 0) {
-                    event.preventDefault();
-                    isScrolling = true;
-                    gallerySection.scrollIntoView({ behavior: 'smooth' });
-                    setTimeout(() => { isScrolling = false; }, 1000);
-                } else if (event.deltaY < 0) {
-                    event.preventDefault();
-                    isScrolling = true;
-                    heroSection.scrollIntoView({ behavior: 'smooth' });
-                    setTimeout(() => { isScrolling = false; }, 1000);
-                }
-            } else if (scrollTop < viewportHeight * 2.5) {
-                // 在第三页
-                if (event.deltaY > 0) {
-                    event.preventDefault();
-                    isScrolling = true;
-                    joinSection.scrollIntoView({ behavior: 'smooth' });
-                    setTimeout(() => { isScrolling = false; }, 1000);
-                } else if (event.deltaY < 0) {
-                    event.preventDefault();
-                    isScrolling = true;
-                    playerSection.scrollIntoView({ behavior: 'smooth' });
-                    setTimeout(() => { isScrolling = false; }, 1000);
-                }
-            } else {
-                // 在第四页
-                if (event.deltaY < 0) {
-                    event.preventDefault();
-                    isScrolling = true;
-                    gallerySection.scrollIntoView({ behavior: 'smooth' });
-                    setTimeout(() => { isScrolling = false; }, 1000);
-                }
-            }
-        }
-
-        // 监听滚轮事件
-        window.addEventListener('wheel', handleWheelScroll, { passive: false });
-        
-        // 监听滚动事件更新导航栏
-        window.addEventListener('scroll', updateActiveNav);
-
-        // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            // 初始化导航栏状态
-            updateActiveNav();
-            
-            // 传送带悬停效果和无缝循环
-            const conveyorTracks = document.querySelectorAll('.conveyor-track');
-            
-            conveyorTracks.forEach(track => {
-                const items = track.querySelectorAll('.conveyor-item');
-                
-                // 复制所有项目到末尾实现无缝循环
-                items.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    track.appendChild(clone);
-                });
-            });
-            
-            // 悬停效果
-            const allConveyorItems = document.querySelectorAll('.conveyor-item');
-            
-            allConveyorItems.forEach(item => {
-                const track = item.closest('.conveyor-track');
-                
-                item.addEventListener('mouseenter', function() {
-                    // 暂停动画
-                    track.style.animationPlayState = 'paused';
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    // 恢复动画
-                    track.style.animationPlayState = 'running';
-                });
-            });
-        });
-    </script>
-    
-    <!-- 网站版权信息 -->
-    <footer class="site-footer">
-        <p>©2025 MikraftWeb</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

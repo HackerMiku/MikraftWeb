@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务器公告 - Mikraft</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .notices-page {
+            min-height: 100vh;
+            padding: 120px 60px 60px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .notices-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-subtitle {
+            font-size: 18px;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(74, 222, 128, 0.1);
+            color: #4ade80;
+            text-decoration: none;
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: rgba(74, 222, 128, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .notice-detail {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .notice-detail:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .notice-detail.important {
+            border-color: rgba(251, 191, 36, 0.5);
+            background: rgba(251, 191, 36, 0.05);
+        }
+        
+        .notice-detail.epic {
+            border-color: rgba(139, 92, 246, 0.5);
+            background: rgba(139, 92, 246, 0.05);
+        }
+        
+        .notice-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .notice-emoji {
+            font-size: 32px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .notice-title h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin: 0;
+        }
+        
+        .notice-date {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-left: auto;
+            padding: 6px 12px;
+            background: rgba(74, 222, 128, 0.1);
+            border-radius: 20px;
+        }
+        
+        .notice-body {
+            color: #94a3b8;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .notice-body p {
+            margin-bottom: 20px;
+        }
+        
+        .notice-body h2, .notice-body h3 {
+            color: #e2e8f0;
+            margin: 30px 0 15px 0;
+        }
+        
+        .notice-body strong {
+            color: #4ade80;
+            font-weight: 600;
+        }
+        
+        .notice-body em {
+            color: #fbbf24;
+            font-style: italic;
+        }
+        
+        .epic-text {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+        .pillar-section {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .pillar-title {
+            color: #8b5cf6;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="brand-gradient">Mikraft</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html#hero" class="nav-link">首页</a>
+            <a href="index.html#about" class="nav-link">介绍</a>
+            <a href="index.html#gallery" class="nav-link">展示</a>
+            <a href="notices.html" class="nav-link active">公告</a>
+            <a href="index.html#join" class="nav-link">加入</a>
+        </div>
+        <div class="theme-toggle">
+            <div class="toggle-ball"></div>
+        </div>
+    </nav>
+
+    <main class="notices-page">
+        <div class="notices-container">
+            <div class="page-header">
+                <h1 class="page-title">服务器公告</h1>
+                <p class="page-subtitle">最新动态与重要通知</p>
+                <a href="index.html" class="back-button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                    </svg>
+                    返回首页
+                </a>
+            </div>
+
+            <!-- 三权制衡公告 -->
+            <article class="notice-detail epic">
+                <div class="notice-title">
+                    <div class="notice-emoji">⚖️</div>
+                    <h2 class="epic-text">三权制衡</h2>
+                    <span class="notice-date">2025年8月25日</span>
+                </div>
+                <div class="notice-body">
+                    <p>天启已至，灾厄将临，吾命如风中残烛，终难逃湮灭之劫。然<strong>mikraft</strong>之圣火不可断绝，吾之意志必须永续！</p>
+                    
+                    <p>谨遵苍穹谕旨，以血与火铸就契约，在此将天命权柄三分，赐予三位天命之子——立三柱而撑天地，分权柄而制衡，共掌混沌寰宇！</p>
+
+                    <div class="pillar-section">
+                        <div class="pillar-title">「开拓之柱」· 荒芜边疆的征服者</div>
+                        <p><strong>7a7ya</strong>，吾赐汝钻石之镐，命汝劈开虚无，筑起文明之基！汝掌「开辟」之权，凡荒土所在，皆应为城；凡黑暗所覆，必燃火种！</p>
+                    </div>
+
+                    <div class="pillar-section">
+                        <div class="pillar-title">「赤石之柱」· 赤石的守护者</div>
+                        <p><strong>MC_Yao_Wan</strong>，吾予汝熔岩之契，命汝执掌大地血脉，炼铸万物之源！汝承「红核」之责，铸兵甲以镇四方，煅神器以定乾坤！</p>
+                    </div>
+
+                    <div class="pillar-section">
+                        <div class="pillar-title">「智械之柱」· 永恒回响的编织者</div>
+                        <p><strong>He_HuaQAQ</strong>，吾授汝红石秘卷，命汝构织逻辑之网，启鸣机械神谕！汝司「序理」之职，以齿轮驭时空，以石粉写天命！</p>
+                    </div>
+
+                    <p><strong>三权相峙，互衡互生！</strong></p>
+                    <p>若一者倾天，二者共裁之；若万物崩殂，三者合阵复寰宇！</p>
+                    <p><em>——天命已降，契约即成！</em></p>
+                    <p class="epic-text"><strong>吾虽逝，而mikraft永存！</strong></p>
+                </div>
+            </article>
+
+            <!-- 服主驾崩公告 -->
+            <article class="notice-detail important">
+                <div class="notice-title">
+                    <div class="notice-emoji">👑</div>
+                    <h2>服主驾崩</h2>
+                    <span class="notice-date">2025年8月31日</span>
+                </div>
+                <div class="notice-body">
+                    <p>各位亲爱的玩家们，由于服主最近沉迷于其他游戏，Minecraft服务器暂时进入"无政府"状态。</p>
+                    <p>不过别担心，服务器依然正常运行，大家可以继续愉快地建造和探索！</p>
+                    <p>如有紧急事务，请联系管理员团队。三权制衡体系将确保服务器的正常运营。</p>
+                    <p><strong>服务器状态：</strong> 正常运行</p>
+                    <p><strong>管理体系：</strong> 三权制衡生效</p>
+                </div>
+            </article>
+
+            <!-- QQ机器人公告 -->
+            <article class="notice-detail">
+                <div class="notice-title">
+                    <div class="notice-emoji">🤖</div>
+                    <h2>关于群内QQ机器人</h2>
+                    <span class="notice-date">2025年9月14日</span>
+                </div>
+                <div class="notice-body">
+                    <p>由于不可抗力，群内非官方QQ机器人暂时停止服务。</p>
+                    <p>关于加入白名单事宜请咨询群管理员。</p>
+                    <p><strong>受影响功能：</strong></p>
+                    <ul>
+                        <li>自动白名单申请</li>
+                        <li>服务器状态查询</li>
+                        <li>玩家在线统计</li>
+                    </ul>
+                    <p><strong>替代方案：</strong> 请直接联系群管理员处理相关事务</p>
+                </div>
+            </article>
+
+            <!-- Dark Reader问题处理 -->
+            <article class="notice-detail">
+                <div class="notice-title">
+                    <div class="notice-emoji">🌙</div>
+                    <h2>Dark Reader问题处理</h2>
+                    <span class="notice-date">2025年8月25日</span>
+                </div>
+                <div class="notice-body">
+                    <p>针对使用Dark Reader插件导致的网页显示问题，我们已进行优化。</p>
+                    <p>现在网页在暗色模式下也能正常显示背景图片和各种效果。</p>
+                    <p><strong>修复内容：</strong></p>
+                    <ul>
+                        <li>背景图片显示异常</li>
+                        <li>文字颜色对比度问题</li>
+                        <li>按钮样式兼容性</li>
+                    </ul>
+                    <p>如仍有显示问题，请及时反馈给管理员。</p>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="brand-gradient">Mikraft</span>
+                <p>方块人的温馨小窝</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html#hero">首页</a>
+                <a href="index.html#about">介绍</a>
+                <a href="index.html#gallery">展示</a>
+                <a href="notices.html">公告</a>
+                <a href="index.html#join">加入</a>
+            </div>
+            <div class="footer-info">
+                <p>&copy; 2025 Mikraft. 保持创造，保持友爱。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
