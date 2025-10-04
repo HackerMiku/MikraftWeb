@@ -58,21 +58,87 @@ const themeToggle = document.querySelector('.theme-toggle');
 const toggleBall = document.querySelector('.toggle-ball');
 let isDark = true; // 默认为暗色主题
 
-themeToggle.addEventListener('click', () => {
-    isDark = !isDark;
+if (themeToggle && toggleBall) {
+    themeToggle.addEventListener('click', () => {
+        isDark = !isDark;
+        
+        if (isDark) {
+            // 暗色主题
+            toggleBall.style.transform = 'translateX(0)';
+            document.body.style.background = 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)';
+            
+            // 更新CSS变量
+            document.documentElement.style.setProperty('--bg-primary', '#0f172a');
+            document.documentElement.style.setProperty('--bg-secondary', '#1e293b');
+            document.documentElement.style.setProperty('--text-primary', '#e2e8f0');
+            document.documentElement.style.setProperty('--text-secondary', '#94a3b8');
+            
+            // 更新英雄区域背景
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.background = 'linear-gradient(rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.8)), url("Homepage.webp")';
+            }
+            
+            // 更新其他区域背景
+            const aboutSection = document.querySelector('.about-section');
+            if (aboutSection) {
+                aboutSection.style.background = 'linear-gradient(135deg, #1e293b 0%, #334155 100%)';
+            }
+            
+            const gallerySection = document.querySelector('.gallery-showcase');
+            if (gallerySection) {
+                gallerySection.style.background = 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)';
+            }
+            
+            const noticesPage = document.querySelector('.notices-page');
+            if (noticesPage) {
+                noticesPage.style.background = 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)';
+            }
+            
+        } else {
+            // 亮色主题
+            toggleBall.style.transform = 'translateX(30px)';
+            document.body.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)';
+            
+            // 更新CSS变量
+            document.documentElement.style.setProperty('--bg-primary', '#ffffff');
+            document.documentElement.style.setProperty('--bg-secondary', '#f8fafc');
+            document.documentElement.style.setProperty('--text-primary', '#1a1a2e');
+            document.documentElement.style.setProperty('--text-secondary', '#6b7280');
+            
+            // 更新英雄区域背景
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.background = 'linear-gradient(rgba(248, 250, 252, 0.8), rgba(226, 232, 240, 0.9)), url("Homepage.webp")';
+            }
+            
+            // 更新其他区域背景
+            const aboutSection = document.querySelector('.about-section');
+            if (aboutSection) {
+                aboutSection.style.background = 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)';
+            }
+            
+            const gallerySection = document.querySelector('.gallery-showcase');
+            if (gallerySection) {
+                gallerySection.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)';
+            }
+            
+            const noticesPage = document.querySelector('.notices-page');
+            if (noticesPage) {
+                noticesPage.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)';
+            }
+        }
+        
+        // 保存主题设置到本地存储
+        localStorage.setItem('mikraft-theme', isDark ? 'dark' : 'light');
+    });
     
-    if (isDark) {
-        toggleBall.style.transform = 'translateX(0)';
-        document.body.style.background = 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)';
-        document.documentElement.style.setProperty('--bg-primary', '#0f172a');
-        document.documentElement.style.setProperty('--text-primary', '#e2e8f0');
-    } else {
-        toggleBall.style.transform = 'translateX(30px)';
-        document.body.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)';
-        document.documentElement.style.setProperty('--bg-primary', '#ffffff');
-        document.documentElement.style.setProperty('--text-primary', '#1a1a2e');
+    // 页面加载时恢复主题设置
+    const savedTheme = localStorage.getItem('mikraft-theme');
+    if (savedTheme === 'light') {
+        themeToggle.click(); // 切换到亮色主题
     }
-});
+}
 
 // 平滑滚动到指定区域
 function scrollToSection(sectionId) {
@@ -358,11 +424,31 @@ function updateActiveNav() {
     
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
+        const href = link.getAttribute('href');
+        
+        // 处理锚点链接
+        if (href === `#${current}`) {
+            link.classList.add('active');
+        }
+        // 处理外部链接（如公告页面）
+        else if (href === 'notices.html' && window.location.pathname.includes('notices.html')) {
             link.classList.add('active');
         }
     });
 }
+
+// 点击导航链接时立即更新活跃状态
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        
+        // 如果是锚点链接，立即更新活跃状态
+        if (href.startsWith('#')) {
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        }
+    });
+});
 
 window.addEventListener('scroll', updateActiveNav);
 

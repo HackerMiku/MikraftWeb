@@ -99,6 +99,7 @@ button, a, .showcase-item, .notice-card, .nav-link, .theme-toggle {
 .nav-links {
     display: flex;
     gap: 40px;
+    align-items: center;
 }
 
 .nav-link {
@@ -115,6 +116,40 @@ button, a, .showcase-item, .notice-card, .nav-link, .theme-toggle {
     transform: translateY(-2px);
 }
 
+/* 公告按钮特殊样式 */
+.notice-link {
+    margin-left: 20px;
+    padding: 8px 16px;
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    border-radius: 20px;
+    position: relative;
+}
+
+.notice-link::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 20px;
+    background: rgba(74, 222, 128, 0.3);
+}
+
+.notice-link:hover {
+    background: rgba(74, 222, 128, 0.2);
+    border-color: rgba(74, 222, 128, 0.4);
+    color: #4ade80;
+    transform: translateY(-2px);
+}
+
+.notice-link.active {
+    background: rgba(74, 222, 128, 0.2);
+    border-color: #4ade80;
+    color: #4ade80;
+}
+
 .theme-toggle {
     width: 60px;
     height: 30px;
@@ -123,18 +158,45 @@ button, a, .showcase-item, .notice-card, .nav-link, .theme-toggle {
     position: relative;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+}
+
+.theme-toggle::before {
+    content: '🌙';
+    font-size: 12px;
+    position: absolute;
+    left: 6px;
+    z-index: 1;
+}
+
+.theme-toggle::after {
+    content: '☀️';
+    font-size: 12px;
+    position: absolute;
+    right: 6px;
+    z-index: 1;
 }
 
 .toggle-ball {
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
     background: white;
     border-radius: 50%;
     position: absolute;
-    top: 2px;
-    left: 2px;
+    top: 4px;
+    left: 4px;
     transition: transform 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 }
 
 /* 主要内容 */
@@ -1047,4 +1109,31 @@ button:focus,
 a:focus {
     outline: 2px solid #4ade80;
     outline-offset: 2px;
+}
+
+/* 导航链接活跃状态 */
+.nav-link.active {
+    color: #4ade80;
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #4ade80;
+    border-radius: 1px;
+}
+
+/* 确保普通导航链接的活跃状态 */
+.nav-link:not(.notice-link).active::after {
+    bottom: -5px;
+}
+
+/* 公告按钮的活跃状态已在上面定义，不显示下划线 */
+.notice-link.active::after {
+    display: none;
 }
