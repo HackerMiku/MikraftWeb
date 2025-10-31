@@ -19,12 +19,53 @@
             <a href="#about" class="nav-link">介绍</a>
             <a href="#gallery" class="nav-link">展示</a>
             <a href="#join" class="nav-link">加入</a>
-            <a href="notices.html" class="nav-link notice-link">公告</a>
         </div>
-        <div class="theme-toggle">
-            <div class="toggle-ball"></div>
+        <div class="nav-actions">
+            <a href="#notices" class="nav-link notices-link">📢 公告</a>
+            <div class="nav-controls">
+                <button class="music-toggle" id="musicToggle" title="音乐播放器 (M)" aria-label="音乐播放器">
+                    <span class="music-icon">🎵</span>
+                </button>
+                <div class="theme-toggle">
+                    <div class="toggle-ball"></div>
+                </div>
+            </div>
         </div>
     </nav>
+
+    <!-- 音乐播放器 -->
+    <div class="music-player" id="musicPlayer">
+        <div class="music-player-content">
+                <button class="music-close" id="musicClose" title="关闭 (M)">✕</button>
+                <div class="music-info">
+                <div class="music-cover">
+                    <img src="BGM/cover.webp" alt="Music Cover">
+                </div>
+                <div class="music-details">
+                    <h4 class="music-title">Mikraft BGM</h4>
+                    <p class="music-artist">服务器背景音乐</p>
+                </div>
+            </div>
+            <div class="music-controls">
+                <button class="music-btn" id="prevBtn">⏮</button>
+                <button class="music-btn play-btn" id="playBtn">▶</button>
+                <button class="music-btn" id="nextBtn">⏭</button>
+            </div>
+            <div class="music-progress">
+                <span class="time-current">0:00</span>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <span class="time-total">0:00</span>
+            </div>
+            <div class="music-volume">
+                <span class="volume-icon">🔊</span>
+                <div class="volume-bar">
+                    <div class="volume-fill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main class="main-content">
         <!-- 英雄区域 -->
@@ -323,6 +364,113 @@
         </section>
     </main>
 
+        <!-- 公告区域 -->
+        <section class="notices-section" id="notices">
+            <div class="notices-container">
+                <div class="page-header">
+                    <h1 class="page-title">服务器公告</h1>
+                    <p class="page-subtitle">最新动态与重要通知</p>
+                    <a href="#hero" class="back-button">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                        </svg>
+                        返回顶部
+                    </a>
+                </div>
+
+                <!-- 三权制衡公告 -->
+                <article class="notice-detail epic">
+                    <div class="notice-title">
+                        <div class="notice-emoji">⚖️</div>
+                        <h2 class="epic-text">三权制衡</h2>
+                        <span class="notice-date">2025年8月25日</span>
+                    </div>
+                    <div class="notice-body">
+                        <p>天启已至，灾厄将临，吾命如风中残烛，终难逃湮灭之劫。然<strong>mikraft</strong>之圣火不可断绝，吾之意志必须永续！</p>
+                        
+                        <p>谨遵苍穹谕旨，以血与火铸就契约，在此将天命权柄三分，赐予三位天命之子——立三柱而撑天地，分权柄而制衡，共掌混沌寰宇！</p>
+
+                        <div class="pillar-section">
+                            <div class="pillar-title">「开拓之柱」· 荒芜边疆的征服者</div>
+                            <p><strong>7a7ya</strong>，吾赐汝钻石之镐，命汝劈开虚无，筑起文明之基！汝掌「开辟」之权，凡荒土所在，皆应为城；凡黑暗所覆，必燃火种！</p>
+                        </div>
+
+                        <div class="pillar-section">
+                            <div class="pillar-title">「赤石之柱」· 赤石的守护者</div>
+                            <p><strong>MC_Yao_Wan</strong>，吾予汝熔岩之契，命汝执掌大地血脉，炼铸万物之源！汝承「红核」之责，铸兵甲以镇四方，煅神器以定乾坤！</p>
+                        </div>
+
+                        <div class="pillar-section">
+                            <div class="pillar-title">「智械之柱」· 永恒回响的编织者</div>
+                            <p><strong>He_HuaQAQ</strong>，吾授汝红石秘卷，命汝构织逻辑之网，启鸣机械神谕！汝司「序理」之职，以齿轮驭时空，以石粉写天命！</p>
+                        </div>
+
+                        <p><strong>三权相峙，互衡互生！</strong></p>
+                        <p>若一者倾天，二者共裁之；若万物崩殂，三者合阵复寰宇！</p>
+                        <p><em>——天命已降，契约即成！</em></p>
+                        <p class="epic-text"><strong>吾虽逝，而mikraft永存！</strong></p>
+                    </div>
+                </article>
+
+                <!-- 服主驾崩公告 -->
+                <article class="notice-detail important">
+                    <div class="notice-title">
+                        <div class="notice-emoji">👑</div>
+                        <h2>服主驾崩</h2>
+                        <span class="notice-date">2025年8月31日</span>
+                    </div>
+                    <div class="notice-body">
+                        <p>各位亲爱的玩家们，由于服主最近沉迷于其他游戏，Minecraft服务器暂时进入"无政府"状态。</p>
+                        <p>不过别担心，服务器依然正常运行，大家可以继续愉快地建造和探索！</p>
+                        <p>如有紧急事务，请联系管理员团队。三权制衡体系将确保服务器的正常运营。</p>
+                        <p><strong>服务器状态：</strong> 正常运行</p>
+                        <p><strong>管理体系：</strong> 三权制衡生效</p>
+                    </div>
+                </article>
+
+                <!-- QQ机器人公告 -->
+                <article class="notice-detail">
+                    <div class="notice-title">
+                        <div class="notice-emoji">🤖</div>
+                        <h2>关于群内QQ机器人</h2>
+                        <span class="notice-date">2025年9月14日</span>
+                    </div>
+                    <div class="notice-body">
+                        <p>由于不可抗力，群内非官方QQ机器人暂时停止服务。</p>
+                        <p>关于加入白名单事宜请咨询群管理员。</p>
+                        <p><strong>受影响功能：</strong></p>
+                        <ul>
+                            <li>自动白名单申请</li>
+                            <li>服务器状态查询</li>
+                            <li>玩家在线统计</li>
+                        </ul>
+                        <p><strong>替代方案：</strong> 请直接联系群管理员处理相关事务</p>
+                    </div>
+                </article>
+
+                <!-- Dark Reader问题处理 -->
+                <article class="notice-detail">
+                    <div class="notice-title">
+                        <div class="notice-emoji">🌙</div>
+                        <h2>Dark Reader问题处理</h2>
+                        <span class="notice-date">2025年8月25日</span>
+                    </div>
+                    <div class="notice-body">
+                        <p>针对使用Dark Reader插件导致的网页显示问题，我们已进行优化。</p>
+                        <p>现在网页在暗色模式下也能正常显示背景图片和各种效果。</p>
+                        <p><strong>修复内容：</strong></p>
+                        <ul>
+                            <li>背景图片显示异常</li>
+                            <li>文字颜色对比度问题</li>
+                            <li>按钮样式兼容性</li>
+                        </ul>
+                        <p>如仍有显示问题，请及时反馈给管理员。</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-brand">
@@ -333,7 +481,7 @@
                 <a href="#hero">首页</a>
                 <a href="#about">介绍</a>
                 <a href="#gallery">展示</a>
-                <a href="notices.html">公告</a>
+                <a href="#notices">公告</a>
                 <a href="#join">加入</a>
             </div>
             <div class="footer-info">

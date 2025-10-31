@@ -550,9 +550,370 @@ console.log('💡 快捷键：');
 console.log('   T - 切换主题');
 console.log('   空格 - Minecraft爆炸效果');
 console.log('   1-5 - 快速导航到各个区域');
+console.log('   M - 打开/关闭音乐播放器');
+console.log('   空格 (在音乐播放器打开时) - 播放/暂停音乐');
 console.log('🏗️ 功能特色：');
 console.log('   - Minecraft风格设计');
 console.log('   - 服务器公告展示');
 console.log('   - 作品画廊');
 console.log('   - 加入指南');
 console.log('   - 响应式设计');
+console.log('   - BGM音乐播放器 (支持音量记忆和播放状态保存)');
+console.log('🎵 音乐播放器使用说明：');
+console.log('   - 点击右上角音乐图标打开播放器');
+console.log('   - 支持播放/暂停、上一首/下一首');
+console.log('   - 可拖拽进度条和音量条');
+console.log('   - 音量设置会自动保存');
+
+// 音乐播放器功能
+// 特色：
+// - 自动保存播放状态和音量设置
+// - 支持键盘快捷键（M键打开/关闭，空格播放/暂停）
+// - 响应式设计，适配移动设备
+// - 优雅的动画效果和视觉反馈
+// - 错误处理和加载状态显示
+class MusicPlayer {
+    constructor() {
+        this.audio = new Audio();
+        this.tracks = [
+            'BGM/bgm.mp3'
+        ];
+        this.currentTrack = 0;
+        this.isPlaying = false;
+        this.volume = parseFloat(localStorage.getItem('musicVolume')) || 0.7;
+        this.autoPlay = localStorage.getItem('autoPlay') !== 'false'; // 默认自动播放
+        
+        this.initElements();
+        this.bindEvents();
+        this.loadTrack();
+        
+        // 如果之前是播放状态，尝试自动播放
+        if (this.autoPlay) {
+            // 延迟自动播放，等待页面完全加载
+            setTimeout(() => {
+                this.play().catch(e => {
+                    console.log('自动播放被阻止，需要用户交互:', e);
+                    this.autoPlay = false;
+                    localStorage.setItem('autoPlay', 'false');
+                    // 显示用户友好的提示
+                    this.showPlayPrompt();
+                });
+            }, 1000);
+        }
+        
+        // 监听用户首次交互，尝试自动播放
+        this.setupUserInteractionListener();
+    }
+    
+    initElements() {
+        this.player = document.getElementById('musicPlayer');
+        this.playBtn = document.getElementById('playBtn');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        this.progressBar = document.querySelector('.progress-bar');
+        this.progressFill = document.querySelector('.progress-fill');
+        this.volumeBar = document.querySelector('.volume-bar');
+        this.volumeFill = document.querySelector('.volume-fill');
+        this.timeCurrent = document.querySelector('.time-current');
+        this.timeTotal = document.querySelector('.time-total');
+        this.musicToggle = document.querySelector('.music-toggle');
+        this.volumeIcon = document.querySelector('.volume-icon');
+        this.closeBtn = document.getElementById('musicClose');
+        
+        this.audio.volume = this.volume;
+        this.volumeFill.style.width = (this.volume * 100) + '%';
+        
+        // 初始化音量图标
+        this.setVolume(this.volume);
+    }
+    
+    bindEvents() {
+        // 播放/暂停
+        this.playBtn.addEventListener('click', () => this.togglePlay());
+        
+        // 上一首/下一首
+        this.prevBtn.addEventListener('click', () => this.previousTrack());
+        this.nextBtn.addEventListener('click', () => this.nextTrack());
+        
+        // 进度条点击
+        this.progressBar.addEventListener('click', (e) => {
+            const rect = this.progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            this.audio.currentTime = percent * this.audio.duration;
+        });
+        
+        // 音量控制
+        this.volumeBar.addEventListener('click', (e) => {
+            const rect = this.volumeBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            this.setVolume(percent);
+        });
+        
+        // 音频事件
+        this.audio.addEventListener('loadedmetadata', () => this.updateDuration());
+        this.audio.addEventListener('timeupdate', () => this.updateProgress());
+        this.audio.addEventListener('ended', () => this.nextTrack());
+        
+        // 音乐播放器开关
+        this.musicToggle.addEventListener('click', () => this.togglePlayer());
+        
+        // 关闭按钮
+        this.closeBtn.addEventListener('click', () => this.togglePlayer());
+        
+        // 点击外部关闭播放器
+        document.addEventListener('click', (e) => {
+            if (!this.player.contains(e.target) && !this.musicToggle.contains(e.target)) {
+                this.player.classList.remove('active');
+            }
+        });
+        
+        // 键盘快捷键
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'm' || e.key === 'M') {
+                this.togglePlayer();
+            } else if (e.key === ' ') {
+                if (this.player.classList.contains('active')) {
+                    e.preventDefault();
+                    this.togglePlay();
+                }
+            }
+        });
+    }
+    
+    setupUserInteractionListener() {
+        let interactionHandled = false;
+        
+        const handleFirstInteraction = () => {
+            if (interactionHandled) return;
+            interactionHandled = true;
+            
+            // 如果用户之前希望播放音乐，尝试播放
+            if (this.autoPlay && !this.isPlaying) {
+                this.play().catch(e => {
+                    console.log('用户交互后播放失败:', e);
+                    this.showPlayPrompt();
+                });
+            }
+            
+            // 移除监听器
+            document.removeEventListener('click', handleFirstInteraction);
+            document.removeEventListener('keydown', handleFirstInteraction);
+            document.removeEventListener('scroll', handleFirstInteraction);
+        };
+        
+        // 监听多种用户交互事件
+        document.addEventListener('click', handleFirstInteraction);
+        document.addEventListener('keydown', handleFirstInteraction);
+        document.addEventListener('scroll', handleFirstInteraction);
+    }
+    
+    showPlayPrompt() {
+        // 创建播放提示
+        const prompt = document.createElement('div');
+        prompt.className = 'play-prompt';
+        prompt.innerHTML = `
+            <div class="play-prompt-content">
+                <p>🎵 点击播放背景音乐</p>
+                <button onclick="this.parentElement.parentElement.remove(); window.musicPlayer.play();">播放音乐</button>
+            </div>
+        `;
+        
+        // 添加样式
+        const style = document.createElement('style');
+        style.textContent = `
+            .play-prompt {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+                z-index: 10000;
+                animation: slideIn 0.3s ease-out;
+            }
+            
+            .play-prompt-content {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .play-prompt button {
+                background: #4CAF50;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 14px;
+            }
+            
+            .play-prompt button:hover {
+                background: #45a049;
+            }
+            
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        
+        document.head.appendChild(style);
+        document.body.appendChild(prompt);
+        
+        // 5秒后自动隐藏
+        setTimeout(() => {
+            if (prompt.parentElement) {
+                prompt.remove();
+            }
+        }, 5000);
+    }
+    
+    loadTrack() {
+        const trackPath = this.tracks[this.currentTrack];
+        console.log('正在加载音频文件:', trackPath);
+        this.audio.src = trackPath;
+        this.audio.load();
+        
+        // 错误处理
+        this.audio.addEventListener('error', (e) => {
+            console.error('音频加载失败:', e);
+            console.error('音频源:', this.audio.src);
+            console.error('错误代码:', this.audio.error?.code);
+            this.pause();
+            this.playBtn.textContent = '❌';
+            setTimeout(() => {
+                this.playBtn.textContent = '▶';
+            }, 2000);
+        });
+        
+        // 音频加载成功
+        this.audio.addEventListener('canplaythrough', () => {
+            console.log('音频加载成功:', trackPath);
+            if (this.playBtn.textContent === '❌') {
+                this.playBtn.textContent = '▶';
+            }
+        });
+        
+        // 音频加载进度
+        this.audio.addEventListener('loadstart', () => {
+            console.log('开始加载音频:', trackPath);
+        });
+    }
+    
+    togglePlay() {
+        if (this.isPlaying) {
+            this.pause();
+        } else {
+            this.play();
+        }
+    }
+    
+    async play() {
+        try {
+            await this.audio.play();
+            this.isPlaying = true;
+            this.playBtn.textContent = '⏸';
+            this.musicToggle.classList.add('active');
+            this.musicToggle.textContent = '♪';
+            this.autoPlay = true;
+            localStorage.setItem('autoPlay', 'true');
+        } catch (e) {
+            console.error('播放失败:', e);
+            this.playBtn.textContent = '❌';
+            setTimeout(() => {
+                this.playBtn.textContent = '▶';
+            }, 2000);
+        }
+    }
+    
+    pause() {
+        this.audio.pause();
+        this.isPlaying = false;
+        this.playBtn.textContent = '▶';
+        this.musicToggle.classList.remove('active');
+        this.musicToggle.textContent = '♫';
+        this.autoPlay = false;
+        localStorage.setItem('autoPlay', 'false');
+    }
+    
+    previousTrack() {
+        if (this.tracks.length > 1) {
+            this.currentTrack = (this.currentTrack - 1 + this.tracks.length) % this.tracks.length;
+            this.loadTrack();
+            if (this.isPlaying) {
+                this.play();
+            }
+        } else {
+            // 单曲循环
+            this.audio.currentTime = 0;
+            if (this.isPlaying) {
+                this.play();
+            }
+        }
+    }
+    
+    nextTrack() {
+        if (this.tracks.length > 1) {
+            this.currentTrack = (this.currentTrack + 1) % this.tracks.length;
+            this.loadTrack();
+            if (this.isPlaying) {
+                this.play();
+            }
+        } else {
+            // 单曲循环
+            this.audio.currentTime = 0;
+            if (this.isPlaying) {
+                this.play();
+            }
+        }
+    }
+    
+    setVolume(percent) {
+        this.volume = Math.max(0, Math.min(1, percent));
+        this.audio.volume = this.volume;
+        this.volumeFill.style.width = (this.volume * 100) + '%';
+        localStorage.setItem('musicVolume', this.volume.toString());
+        
+        // 更新音量图标
+        if (this.volume === 0) {
+            this.volumeIcon.textContent = '🔇';
+        } else if (this.volume < 0.3) {
+            this.volumeIcon.textContent = '🔈';
+        } else if (this.volume < 0.7) {
+            this.volumeIcon.textContent = '🔉';
+        } else {
+            this.volumeIcon.textContent = '🔊';
+        }
+    }
+    
+    updateDuration() {
+        const minutes = Math.floor(this.audio.duration / 60);
+        const seconds = Math.floor(this.audio.duration % 60);
+        this.timeTotal.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    updateProgress() {
+        const percent = (this.audio.currentTime / this.audio.duration) * 100;
+        this.progressFill.style.width = percent + '%';
+        
+        const minutes = Math.floor(this.audio.currentTime / 60);
+        const seconds = Math.floor(this.audio.currentTime % 60);
+        this.timeCurrent.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    togglePlayer() {
+        this.player.classList.toggle('active');
+        if (this.player.classList.contains('active')) {
+            this.musicToggle.classList.add('active');
+        } else {
+            this.musicToggle.classList.remove('active');
+        }
+    }
+}
+
+// 初始化音乐播放器
+document.addEventListener('DOMContentLoaded', () => {
+    window.musicPlayer = new MusicPlayer();
+});
