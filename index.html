@@ -5,487 +5,234 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mikraft - 方块人的温馨小窝</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
-    <nav class="navbar">
-        <div class="nav-brand">
-            <span class="brand-gradient">Mikraft</span>
-        </div>
-        <div class="nav-links">
-            <a href="#hero" class="nav-link">首页</a>
-            <a href="#about" class="nav-link">介绍</a>
-            <a href="#gallery" class="nav-link">展示</a>
-            <a href="#join" class="nav-link">加入</a>
-        </div>
-        <div class="nav-actions">
-            <a href="#notices" class="nav-link notices-link">📢 公告</a>
-            <div class="nav-controls">
-                <button class="music-toggle" id="musicToggle" title="音乐播放器 (M)" aria-label="音乐播放器">
-                    <span class="music-icon">🎵</span>
-                </button>
-                <div class="theme-toggle">
-                    <div class="toggle-ball"></div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- 音乐播放器 -->
-    <div class="music-player" id="musicPlayer">
-        <div class="music-player-content">
-                <button class="music-close" id="musicClose" title="关闭 (M)">✕</button>
-                <div class="music-info">
-                <div class="music-cover">
-                    <img src="BGM/cover.webp" alt="Music Cover">
-                </div>
-                <div class="music-details">
-                    <h4 class="music-title">24/7哈基米</h4>
-                    <p class="music-artist">B站up: 雾桥茗/DJGenji</p>
-                </div>
-            </div>
-            <div class="music-controls">
-                <button class="music-btn" id="prevBtn">⏮</button>
-                <button class="music-btn play-btn" id="playBtn">▶</button>
-                <button class="music-btn" id="nextBtn">⏭</button>
-            </div>
-            <div class="music-progress">
-                <span class="time-current">0:00</span>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-                <span class="time-total">0:00</span>
-            </div>
-            <div class="music-volume">
-                <span class="volume-icon">🔊</span>
-                <div class="volume-bar">
-                    <div class="volume-fill"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <main class="main-content">
-        <!-- 英雄区域 -->
-        <section class="hero" id="hero">
-            <div class="hero-bg">
-                <div class="gradient-orb orb-1"></div>
-                <div class="gradient-orb orb-2"></div>
-                <div class="gradient-orb orb-3"></div>
-            </div>
+    <!-- 导航栏 -->
+    <header class="site-header">
+        <div class="container navbar">
+            <a href="#hero" class="brand">Mikraft.</a>
             
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span>🎮 Minecraft 服务器</span>
-                </div>
-                <h1 class="hero-title">
-                    <span class="title-line">Mikraft</span>
-                    <span class="title-line gradient-text">温馨小窝</span>
-                </h1>
-                <p class="hero-description">
-                    方块人的温馨小窝，没有争议和对峙，只有和谐与友爱
-                </p>
-                <div class="hero-buttons">
-                    <button class="btn-primary" onclick="scrollToSection('join')">
-                        <span>加入我们</span>
-                        <div class="btn-shine"></div>
+            <div class="nav-right">
+                <nav class="nav-menu">
+                    <a href="#hero" class="nav-link">首页</a>
+                    <a href="#about" class="nav-link">介绍</a>
+                    <a href="#gallery" class="nav-link">展示</a>
+                    <a href="#notices" class="nav-link">公告</a>
+                </nav>
+                <div class="nav-actions">
+                    <button id="themeToggle" class="icon-btn" aria-label="切换主题">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                     </button>
-                    <button class="btn-secondary" onclick="scrollToSection('about')">
-                        <span>了解更多</span>
-                        <svg class="play-icon" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z"/>
-                        </svg>
+                    <a href="#join" class="btn btn-sm btn-black">加入我们</a>
+                    <button class="menu-toggle" aria-label="菜单">
+                        <span></span>
+                        <span></span>
                     </button>
                 </div>
             </div>
+        </div>
+    </header>
 
-            <div class="hero-visual">
-                <div class="floating-card card-1">
-                    <div class="card-glow"></div>
-                    <div class="card-content">
-                        <div class="card-icon">🏗️</div>
-                        <h3>建筑创作</h3>
-                        <p>天马行空的建筑梦想</p>
+    <main>
+        <!-- Hero 区域 -->
+        <section id="hero" class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="hero-label">Minecraft Server</div>
+                    <h1 class="hero-title">方块人的<br>温馨小窝</h1>
+                    <p class="hero-desc">没有争议和对峙，只有和谐与友爱。<br>在这里，我们将天马行空的梦想化为现实。</p>
+                    <div class="hero-actions">
+                        <a href="#join" class="btn btn-glow">立即加入</a>
+                        <a href="#about" class="btn btn-glass">了解更多</a>
                     </div>
                 </div>
-                
-                <div class="floating-card card-2">
-                    <div class="card-glow"></div>
-                    <div class="card-content">
-                        <div class="card-icon">⚙️</div>
-                        <h3>红石科技</h3>
-                        <p>为科技进步添砖加瓦</p>
+                <!-- 音乐播放器胶囊 (集成在 Hero 区域或悬浮) -->
+                <div class="music-capsule" id="musicPlayer">
+                    <button id="playBtn" class="play-btn">
+                        <svg class="icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        <svg class="icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </button>
+                    <div class="track-info">
+                        <span class="track-name">24/7哈基米</span>
+                        <span class="track-artist">雾桥茗/DJGenji</span>
                     </div>
-                </div>
-
-                <div class="floating-card card-3">
-                    <div class="card-glow"></div>
-                    <div class="card-content">
-                        <div class="card-icon">🤝</div>
-                        <h3>团队合作</h3>
-                        <p>和谐友爱的游戏环境</p>
+                    <div class="music-visualizer">
+                        <span></span><span></span><span></span><span></span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 介绍区域 -->
-        <section class="about-section" id="about">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2 class="section-title">🎉 欢迎你的加入</h2>
-                    <div class="text-content">
-                        <p>没有争议和对峙，只有和谐与友爱</p>
-                        <p>我们追求团队合作，一起完成天马行空的梦想</p>
-                        <p>拿起方块，将想象的建筑亲手搭建</p>
-                        <p>拾起红石，为科技的进步添砖加瓦</p>
-                        <p>这里既是大展身手的方块舞台，也是休闲娱乐的温暖小窝</p>
-                        <p>不止MC，我们还欢迎别的爱好讨论</p>
-                        <p>网游、单机、番剧、音乐...</p>
+        <!-- 介绍区域 (极简两列) -->
+        <section id="about" class="section about-section">
+            <div class="container">
+                <div class="grid-2-col">
+                    <div class="section-header">
+                        <h2 class="section-title">关于我们</h2>
+                        <p class="section-text">Mikraft 不仅仅是一个服务器，更是一个温暖的家。在这里，我们追求团队合作，一起完成天马行空的梦想。</p>
+                        <ul class="clean-list">
+                            <li>和谐友爱的环境</li>
+                            <li>多元化的讨论</li>
+                            <li>白名单制度保障</li>
+                        </ul>
                     </div>
-                </div>
-                
-                <div class="about-visual">
-                    <div class="minecraft-scene">
-                        <div class="block-animation">
-                            <div class="block grass"></div>
-                            <div class="block stone"></div>
-                            <div class="block wood"></div>
-                            <div class="block diamond"></div>
-                        </div>
+                    <div class="about-image-wrapper">
+                        <img src="ShowPictures/building_钟楼.webp" alt="Mikraft 建筑" class="rounded-image">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 展示画廊 -->
-        <section class="gallery-showcase" id="gallery">
-            <div class="gallery-header">
-                <h2>作品展示</h2>
-                <p>玩家们的精彩创作</p>
-            </div>
-            
-            <!-- 机器展示 -->
-            <div class="showcase-category">
-                <h3 class="category-title">⚙️ 红石机器</h3>
-                <div class="showcase-grid">
-                    <div class="showcase-item" data-category="machine">
-                        <div class="showcase-image">
-                            <img src="ShowPictures/machine_凋零玫瑰农场.webp" alt="凋零玫瑰农场" loading="lazy">
-                            <div class="showcase-overlay">
-                                <h4>凋零玫瑰农场</h4>
-                                <p>自动化凋零玫瑰生产系统</p>
-                            </div>
+        <!-- 展示画廊 (Bento Grid) -->
+        <section id="gallery" class="section gallery-section">
+            <div class="container">
+                <h2 class="section-title mb-lg">精彩瞬间</h2>
+                <div class="bento-grid">
+                    <!-- 1. 樱花地狱门 (重点 2x2) -->
+                    <div class="bento-item span-2x2">
+                        <img src="ShowPictures/building_樱花风地狱门.webp" alt="樱花地狱门" loading="lazy">
+                        <div class="bento-overlay">
+                            <h3>樱花地狱门</h3>
+                            <p>唯美传送门设计</p>
                         </div>
                     </div>
                     
-                    <div class="showcase-item" data-category="machine">
-                        <div class="showcase-image">
-                            <img src="ShowPictures/machine_固化机.webp" alt="固化机" loading="lazy">
-                            <div class="showcase-overlay">
-                                <h4>固化机</h4>
-                                <p>高效物品固化装置</p>
-                            </div>
+                    <!-- 2. 浮空魔丸 (高塔 1x2) -->
+                    <div class="bento-item span-1x2">
+                        <img src="ShowPictures/building_浮空魔丸.webp" alt="浮空魔丸" loading="lazy">
+                        <div class="bento-overlay">
+                            <h3>浮空魔丸</h3>
+                            <p>神秘浮空建筑</p>
                         </div>
                     </div>
                     
-                    <div class="showcase-item" data-category="machine">
-                        <div class="showcase-image">
-                            <img src="ShowPictures/machine_蜜蜂农场.webp" alt="蜜蜂农场" loading="lazy">
-                            <div class="showcase-overlay">
-                                <h4>蜜蜂农场</h4>
-                                <p>自动化蜂蜜生产系统</p>
-                            </div>
+                    <!-- 3. 蜜蜂农场 (普通 1x1) -->
+                    <div class="bento-item span-1x1">
+                        <img src="ShowPictures/machine_蜜蜂农场.webp" alt="蜜蜂农场" loading="lazy">
+                        <div class="bento-overlay">
+                            <h3>蜜蜂农场</h3>
                         </div>
                     </div>
                     
-                    <div class="showcase-item" data-category="machine">
-                        <div class="showcase-image">
-                            <img src="ShowPictures/machine_袭击塔.webp" alt="袭击塔" loading="lazy">
-                            <div class="showcase-overlay">
-                                <h4>袭击塔</h4>
-                                <p>高效经验获取装置</p>
-                            </div>
+                    <!-- 4. 袭击塔 (普通 1x1) -->
+                    <div class="bento-item span-1x1">
+                        <img src="ShowPictures/machine_袭击塔.webp" alt="袭击塔" loading="lazy">
+                        <div class="bento-overlay">
+                            <h3>袭击塔</h3>
                         </div>
                     </div>
                     
-                    <div class="showcase-item" data-category="machine">
-                        <div class="showcase-image">
-                            <img src="ShowPictures/machine_320熔炉组.webp" alt="320熔炉组" loading="lazy">
-                            <div class="showcase-overlay">
-                                <h4>320熔炉组</h4>
-                                <p>大规模物品冶炼系统</p>
-                            </div>
+                    <!-- 5. 320熔炉组 (宽 2x1) -->
+                    <div class="bento-item span-2x1">
+                        <img src="ShowPictures/machine_320熔炉组.webp" alt="320熔炉组" loading="lazy">
+                        <div class="bento-overlay">
+                            <h3>320熔炉组</h3>
+                            <p>工业级冶炼中心</p>
                         </div>
                     </div>
                     
-                    <div class="showcase-item" data-category="machine">
-                        <div class="showcase-image">
-                            <img src="ShowPictures/machine_猪灵交易并猪人塔.webp" alt="猪灵交易并猪人塔" loading="lazy">
-                            <div class="showcase-overlay">
-                                <h4>猪灵交易塔</h4>
-                                <p>猪灵交易与经验获取</p>
-                            </div>
+                    <!-- 6. 猪灵交易 (宽 2x1) -->
+                    <div class="bento-item span-2x1">
+                        <img src="ShowPictures/machine_猪灵交易并猪人塔.webp" alt="猪灵交易塔" loading="lazy">
+                        <div class="bento-overlay">
+                            <h3>猪灵交易塔</h3>
+                            <p>高效资源交换</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 7. 钟楼 (普通 1x1) -->
+                    <div class="bento-item span-1x1">
+                        <img src="ShowPictures/building_钟楼.webp" alt="钟楼" loading="lazy">
+                        <div class="bento-overlay">
+                            <h3>钟楼</h3>
+                            <p>地标建筑</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 8. 凋零玫瑰农场 (普通 1x1) -->
+                    <div class="bento-item span-1x1">
+                        <img src="ShowPictures/machine_凋零玫瑰农场.webp" alt="凋零玫瑰农场" loading="lazy">
+                        <div class="bento-overlay">
+                            <h3>凋零玫瑰农场</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- 9. 固化机 (普通 1x1) -->
+                    <div class="bento-item span-1x1">
+                        <img src="ShowPictures/machine_固化机.webp" alt="固化机" loading="lazy">
+                        <div class="bento-overlay">
+                            <h3>固化机</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- 10. 建筑师招募 (普通 1x1) -->
+                    <div class="bento-item span-1x1">
+                        <img src="ShowPictures/building_建筑师招募.webp" alt="建筑师招募" loading="lazy">
+                        <div class="bento-overlay">
+                            <h3>建筑师招募</h3>
+                            <p>加入我们</p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- 建筑展示 -->
-            <div class="showcase-category">
-                <h3 class="category-title">🏗️ 精美建筑</h3>
-                <div class="showcase-grid">
-                    <div class="showcase-item" data-category="building">
-                        <div class="showcase-image">
-                            <img src="ShowPictures/building_浮空魔丸.webp" alt="浮空魔丸" loading="lazy">
-                            <div class="showcase-overlay">
-                                <h4>浮空魔丸</h4>
-                                <p>神秘的浮空建筑</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="showcase-item" data-category="building">
-                        <div class="showcase-image">
-                            <img src="ShowPictures/building_樱花风地狱门.webp" alt="樱花风地狱门" loading="lazy">
-                            <div class="showcase-overlay">
-                                <h4>樱花风地狱门</h4>
-                                <p>优雅的传送门设计</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="showcase-item" data-category="building">
-                        <div class="showcase-image">
-                            <img src="ShowPictures/building_钟楼.webp" alt="钟楼" loading="lazy">
-                            <div class="showcase-overlay">
-                                <h4>钟楼</h4>
-                                <p>古典风格的时钟塔</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="showcase-item" data-category="building">
-                        <div class="showcase-image">
-                            <img src="ShowPictures/building_建筑师招募.webp" alt="建筑师招募" loading="lazy">
-                            <div class="showcase-overlay">
-                                <h4>建筑师招募</h4>
-                                <p>欢迎建筑大师加入</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-center mt-md">
+                    <p class="text-muted text-sm">⚠️ 展示内容皆为玩家搭建。无特别标注皆为非原创。</p>
                 </div>
-            </div>
-
-            <div class="copyright-notice">
-                ⚠️ 该图展示皆为玩家搭建。没有特别标注，皆为非原创。若有侵权，请联系QQ1953494850
             </div>
         </section>
 
-        <!-- 加入我们 -->
-        <section class="join-section" id="join">
-            <div class="join-bg">
-                <div class="join-orb orb-1"></div>
-                <div class="join-orb orb-2"></div>
-            </div>
-            
-            <div class="join-content">
-                <div class="join-text">
-                    <h2>我们会一直等你</h2>
-                    <p>准备好在方块世界中开始你的冒险了吗？加入我们的大家庭，一起创造属于我们的回忆！</p>
-                    
-                    <div class="join-features">
-                        <div class="join-feature">
-                            <div class="feature-icon">🛡️</div>
-                            <div>
-                                <h4>白名单制</h4>
-                                <p>安全可靠的游戏环境</p>
+        <!-- 公告区域 (Clean Cards) -->
+        <section id="notices" class="section notices-section">
+            <div class="container">
+                <h2 class="section-title mb-lg">最新公告</h2>
+                <div class="grid-2-col">
+                    <div class="clean-card">
+                        <div class="card-header">
+                            <span class="tag tag-blue">制度</span>
+                            <span class="date">2025.08.25</span>
+                        </div>
+                        <h3>三权制衡</h3>
+                        <p>天启已至，Mikraft 圣火永续。天命权柄三分，三柱立而撑天地。</p>
+                        <div class="card-footer">
+                            <div class="avatars">
+                                <span>7a</span>
+                                <span>MC</span>
+                                <span>He</span>
                             </div>
                         </div>
-                        
-                        <div class="join-feature">
-                            <div class="feature-icon">👥</div>
-                            <div>
-                                <h4>友好社区</h4>
-                                <p>和谐友爱的玩家群体</p>
-                            </div>
+                    </div>
+                    <div class="clean-card">
+                        <div class="card-header">
+                            <span class="tag tag-red">重要</span>
+                            <span class="date">2025.08.31</span>
                         </div>
-                        
-                        <div class="join-feature">
-                            <div class="feature-icon">🎮</div>
-                            <div>
-                                <h4>多元化</h4>
-                                <p>不只是MC，更多话题讨论</p>
-                            </div>
-                        </div>
+                        <h3>服主状态更新</h3>
+                        <p>由于服主沉迷其他游戏，服务器暂时进入"无政府"状态。请各位玩家依据"三权制衡"原则维持秩序。</p>
                     </div>
                 </div>
-                
-                <div class="join-form">
-                    <div class="join-card">
-                        <h3>加入步骤</h3>
-                        <div class="join-steps">
-                            <div class="join-step">
-                                <span class="step-number">1</span>
-                                <div class="step-content">
-                                    <h4>加入QQ群</h4>
-                                    <p>点击下方按钮加入我们的QQ群</p>
-                                </div>
-                            </div>
-                            
-                            <div class="join-step">
-                                <span class="step-number">2</span>
-                                <div class="step-content">
-                                    <h4>申请白名单</h4>
-                                    <p>在群内申请白名单权限</p>
-                                </div>
-                            </div>
-                            
-                            <div class="join-step">
-                                <span class="step-number">3</span>
-                                <div class="step-content">
-                                    <h4>开始游戏</h4>
-                                    <p>获得白名单后即可进入服务器</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <a href="https://qm.qq.com/q/v5RHGsAoRG" target="_blank" class="join-button">
-                            <span>加入QQ群</span>
-                            <div class="btn-particles"></div>
-                        </a>
-                        
-                        <p class="join-note">服务器采用白名单制，需加群后申请白名单</p>
-                    </div>
+            </div>
+        </section>
+
+        <!-- 加入我们 (Minimal Call to Action) -->
+        <section id="join" class="section join-section">
+            <div class="container">
+                <div class="cta-box">
+                    <h2>准备好开始冒险了吗？</h2>
+                    <p>加入我们的大家庭，一起创造属于我们的回忆。</p>
+                    <a href="https://qm.qq.com/q/v5RHGsAoRG" target="_blank" class="btn btn-white btn-lg">加入 QQ 群</a>
+                    <p class="note">需加群后申请白名单</p>
                 </div>
             </div>
         </section>
     </main>
 
-        <!-- 公告区域 -->
-        <section class="notices-section" id="notices">
-            <div class="notices-container">
-                <div class="page-header">
-                    <h1 class="page-title">服务器公告</h1>
-                    <p class="page-subtitle">最新动态与重要通知</p>
-                    <a href="#hero" class="back-button">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                        </svg>
-                        返回顶部
-                    </a>
-                </div>
-
-                <!-- 三权制衡公告 -->
-                <article class="notice-detail epic">
-                    <div class="notice-title">
-                        <div class="notice-emoji">⚖️</div>
-                        <h2 class="epic-text">三权制衡</h2>
-                        <span class="notice-date">2025年8月25日</span>
-                    </div>
-                    <div class="notice-body">
-                        <p>天启已至，灾厄将临，吾命如风中残烛，终难逃湮灭之劫。然<strong>mikraft</strong>之圣火不可断绝，吾之意志必须永续！</p>
-                        
-                        <p>谨遵苍穹谕旨，以血与火铸就契约，在此将天命权柄三分，赐予三位天命之子——立三柱而撑天地，分权柄而制衡，共掌混沌寰宇！</p>
-
-                        <div class="pillar-section">
-                            <div class="pillar-title">「开拓之柱」· 荒芜边疆的征服者</div>
-                            <p><strong>7a7ya</strong>，吾赐汝钻石之镐，命汝劈开虚无，筑起文明之基！汝掌「开辟」之权，凡荒土所在，皆应为城；凡黑暗所覆，必燃火种！</p>
-                        </div>
-
-                        <div class="pillar-section">
-                            <div class="pillar-title">「赤石之柱」· 赤石的守护者</div>
-                            <p><strong>MC_Yao_Wan</strong>，吾予汝熔岩之契，命汝执掌大地血脉，炼铸万物之源！汝承「红核」之责，铸兵甲以镇四方，煅神器以定乾坤！</p>
-                        </div>
-
-                        <div class="pillar-section">
-                            <div class="pillar-title">「智械之柱」· 永恒回响的编织者</div>
-                            <p><strong>He_HuaQAQ</strong>，吾授汝红石秘卷，命汝构织逻辑之网，启鸣机械神谕！汝司「序理」之职，以齿轮驭时空，以石粉写天命！</p>
-                        </div>
-
-                        <p><strong>三权相峙，互衡互生！</strong></p>
-                        <p>若一者倾天，二者共裁之；若万物崩殂，三者合阵复寰宇！</p>
-                        <p><em>——天命已降，契约即成！</em></p>
-                        <p class="epic-text"><strong>吾虽逝，而mikraft永存！</strong></p>
-                    </div>
-                </article>
-
-                <!-- 服主驾崩公告 -->
-                <article class="notice-detail important">
-                    <div class="notice-title">
-                        <div class="notice-emoji">👑</div>
-                        <h2>服主驾崩</h2>
-                        <span class="notice-date">2025年8月31日</span>
-                    </div>
-                    <div class="notice-body">
-                        <p>各位亲爱的玩家们，由于服主最近沉迷于其他游戏，Minecraft服务器暂时进入"无政府"状态。</p>
-                        <p>不过别担心，服务器依然正常运行，大家可以继续愉快地建造和探索！</p>
-                        <p>如有紧急事务，请联系管理员团队。三权制衡体系将确保服务器的正常运营。</p>
-                        <p><strong>服务器状态：</strong> 正常运行</p>
-                        <p><strong>管理体系：</strong> 三权制衡生效</p>
-                    </div>
-                </article>
-
-                <!-- QQ机器人公告 -->
-                <article class="notice-detail">
-                    <div class="notice-title">
-                        <div class="notice-emoji">🤖</div>
-                        <h2>关于群内QQ机器人</h2>
-                        <span class="notice-date">2025年9月14日</span>
-                    </div>
-                    <div class="notice-body">
-                        <p>由于不可抗力，群内非官方QQ机器人暂时停止服务。</p>
-                        <p>关于加入白名单事宜请咨询群管理员。</p>
-                        <p><strong>受影响功能：</strong></p>
-                        <ul>
-                            <li>自动白名单申请</li>
-                            <li>服务器状态查询</li>
-                            <li>玩家在线统计</li>
-                        </ul>
-                        <p><strong>替代方案：</strong> 请直接联系群管理员处理相关事务</p>
-                    </div>
-                </article>
-
-                <!-- Dark Reader问题处理 -->
-                <article class="notice-detail">
-                    <div class="notice-title">
-                        <div class="notice-emoji">🌙</div>
-                        <h2>Dark Reader问题处理</h2>
-                        <span class="notice-date">2025年8月25日</span>
-                    </div>
-                    <div class="notice-body">
-                        <p>针对使用Dark Reader插件导致的网页显示问题，我们已进行优化。</p>
-                        <p>现在网页在暗色模式下也能正常显示背景图片和各种效果。</p>
-                        <p><strong>修复内容：</strong></p>
-                        <ul>
-                            <li>背景图片显示异常</li>
-                            <li>文字颜色对比度问题</li>
-                            <li>按钮样式兼容性</li>
-                        </ul>
-                        <p>如仍有显示问题，请及时反馈给管理员。</p>
-                    </div>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <span class="brand-gradient">Mikraft</span>
-                <p>方块人的温馨小窝</p>
-            </div>
-            <div class="footer-links">
-                <a href="#hero">首页</a>
-                <a href="#about">介绍</a>
-                <a href="#gallery">展示</a>
-                <a href="#notices">公告</a>
-                <a href="#join">加入</a>
-            </div>
-            <div class="footer-info">
-                <p>&copy; 2025 Mikraft. 保持创造，保持友爱。</p>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">Mikraft.</div>
+                <p>&copy; 2025 Mikraft Server.</p>
             </div>
         </div>
     </footer>
